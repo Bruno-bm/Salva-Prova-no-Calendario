@@ -1,3 +1,7 @@
 import context.context
 
-context.context.login
+
+def main():
+    context.context.login
+
+
