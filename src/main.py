@@ -6,7 +6,7 @@ from oauth2client import file, client, tools
 import context.context
 
 # If modifying these scopes, delete the file token.json.
-SCOPES = 'https://www.googleapis.com/auth/calendar.readonly'
+SCOPES = 'https://www.googleapis.com/auth/calendar'
 
 def main():
     #context.context.login
@@ -22,18 +22,9 @@ def main():
 
     # Call the Calendar API
     now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
-    print('Getting the upcoming 10 events')
-    events_result = service.events().list(calendarId='primary', timeMin=now,
-                                          maxResults=10, singleEvents=True,
-                                          orderBy='startTime').execute()
-    events = events_result.get('items', [])
-
-    if not events:
-        print('No upcoming events found.')
-    for event in events:
-        start = event['start'].get('dateTime', event['start'].get('date'))
-        print(start, event['summary'])
-
+    print('Insert event')
+    events_result = service.events().insert(calendarId='primary', body={"summary": "Teste api", "start": {"date":"2018-10-25"},"end": {"date":"2018-10-25"}, "description":'teste descrição'}).execute()
+    print('Event created: %s' % (events_result.get('htmlLink')))
 
 if __name__ == '__main__':
     main()
