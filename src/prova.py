@@ -4,4 +4,3 @@ class Prova:
     self.diaSemana = diaSemana
     self.materia = materia
     self.professor = professor
-
